@@ -1,0 +1,16 @@
+{
+  "name": "graduationproject",
+  "version": "1.0.0",
+  "description": "Server Side app that handels the logic for mobile and web apps that suggests summaries for non-fiction books that help the user to solve a problem or develop a skill.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.0",
+    "mongoose": "^8.6.2"
+  }
+}

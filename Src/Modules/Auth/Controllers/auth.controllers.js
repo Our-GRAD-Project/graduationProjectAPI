@@ -1,3 +1,5 @@
+import jwt from "jsonwebtoken";
+import transporter from "../../../../Utils/emails.js";
 import ServerError, {
   catchAsyncError,
 } from "../../../../Utils/errorHandeling.js";
@@ -45,4 +47,38 @@ export const signIn = catchAsyncError(async (req, res) => {
     sameSite: "Strict", // Prevent CSRF by restricting cross-origin requests
   });
   res.json({ message: "signed in successfully" });
+});
+
+export const sendResetPortal = catchAsyncError(async (req, res) => {
+  const { email } = req.body;
+  const user = await userModel.findOne({ email });
+  if (!user) throw new ServerError("this email is not registered", 404);
+
+  const token = createToken({ email });
+
+  transporter.sendMail({
+    from: process.env.EMAIL,
+    to: email,
+    subject: "Reset Your Password",
+    text: "You Asked To Reset Your Pass",
+    html: `<a>${token}</a>`,
+  });
+  res.json({ message: "check your mail" });
+});
+
+export const settingNewPassword = catchAsyncError(async (req, res) => {
+  const { password } = req.body;
+  const { token } = req.query;
+
+  try {
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
+    const newPassword = hashPassword(password);
+    await userModel.updateOne(
+      { email: decoded.email },
+      { password: newPassword }
+    );
+    res.json({ message: "password reset successfully" });
+  } catch (error) {
+    throw new ServerError(error.message, 498);
+  }
 });

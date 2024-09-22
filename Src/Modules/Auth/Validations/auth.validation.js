@@ -38,3 +38,26 @@ export const signinSchema = joi.object({
   params: {},
   query: {},
 });
+
+export const resetPassSchema = joi.object({
+  body: {
+    email: joi.string().email({
+      minDomainSegments: 2,
+    }),
+  },
+  params: {},
+  query: {},
+});
+export const newPassSchema = joi.object({
+  body: {
+    password: joi
+      .string()
+      .pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/
+      ),
+  },
+  params: {},
+  query: {
+    token: joi.string(),
+  },
+});

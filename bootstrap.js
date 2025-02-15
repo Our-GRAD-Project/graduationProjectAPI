@@ -2,9 +2,12 @@ import express from "express";
 import cors from "cors";
 import v1Router from "./Src/Routes/V1.routes.js";
 import ServerError from "./Utils/errorHandeling.js";
+import passport from "passport";
+import "./Src/Modules/Auth/Utils/passport.config.js";
 
 export const bootstrap = (app) => {
   app.use(cors({ credentials: true }));
+  app.use(passport.initialize())
 
   app.use(express.json());
 

@@ -2,8 +2,6 @@ import joi from "joi";
 
 export const signupSchema = joi.object({
   body: {
-    firstName: joi.string().min(3).max(10).trim().required(),
-    lastName: joi.string().min(3).max(10).trim().required(),
     userName: joi.string().min(3).max(15).trim().required(),
     email: joi.string().email({
       minDomainSegments: 2,
@@ -13,12 +11,6 @@ export const signupSchema = joi.object({
       .pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/
       ),
-    phone: joi
-      .string()
-      .max(15)
-      .trim()
-      .pattern(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/)
-      .required(),
   },
   params: {},
   query: {},
@@ -48,6 +40,15 @@ export const resetPassSchema = joi.object({
   params: {},
   query: {},
 });
+
+export const verifyCodeSchema = joi.object({
+  body:{
+    resetCode: joi.string().length(6),
+    resetToken: joi.string()
+  },
+  params: {},
+  query: {},
+})
 export const newPassSchema = joi.object({
   body: {
     password: joi
@@ -55,9 +56,8 @@ export const newPassSchema = joi.object({
       .pattern(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/
       ),
+      resetToken: joi.string()
   },
   params: {},
-  query: {
-    token: joi.string(),
-  },
+  query: {},
 });

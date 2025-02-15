@@ -2,19 +2,10 @@ import mongoose from "mongoose";
 import { ROLE, SUBSCRIBTION } from "../../../../Utils/enums.js";
 
 const userSchema = new mongoose.Schema({
-  firstName: {
+  googleId: {
     type: String,
-    minlength: 3,
-    maxlength: 20,
-    required: true,
-    trim: true,
-  },
-  lastName: {
-    type: String,
-    minlength: 3,
-    maxlength: 20,
-    required: true,
-    trim: true,
+    unique: true, // Only one Google account per user
+    sparse: true, // Allows both Google and non-Google users
   },
   userName: {
     type: String,
@@ -46,7 +37,6 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     minlength: 8,
-    required: true,
   },
   role: {
     type: String,
@@ -68,6 +58,7 @@ const userSchema = new mongoose.Schema({
   },
   signupDate: {
     type: Date,
+    default: Date.now(),
     required: true,
   },
   active: {
@@ -77,6 +68,15 @@ const userSchema = new mongoose.Schema({
   lastActiveDate: {
     type: Date,
   },
+  resetCode:{
+    type: String,
+  },
+  resetCodeExpire:{
+    type: Date
+  },
+  resetToken:{
+    type: String
+  }
 });
 
 const userModel = mongoose.model("User", userSchema);

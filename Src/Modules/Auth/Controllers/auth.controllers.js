@@ -7,6 +7,11 @@ import { hashPassword, verifyPassword } from "../../../../Utils/hashing.js";
 import { createToken } from "../../../../Utils/token.js";
 import userModel from "../../User/Models/user.model.js";
 import crypto from "node:crypto"
+
+
+
+
+
 export const signup = catchAsyncError(async (req, res) => {
   const { userName, email, password } = req.body;
   const pass = hashPassword(password);

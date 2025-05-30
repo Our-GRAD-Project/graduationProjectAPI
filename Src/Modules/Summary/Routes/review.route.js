@@ -1,27 +1,32 @@
 import { Router } from "express"
+import { addReview, deleteReview, getReviews, updateReview } from "../Controllers/reveiwContrrollers.js"
 import validate from "../../../Middlewares/validation.js"
+import { authenticate } from "../../Auth/Middlewares/authenticate.js"
 
 const router = Router({ mergeParams: true })
 
 router
 	.route('/')
-	.get(validate(getReviewsSchema), getReviews)
+	.get(
+		// validate(getReviewsSchema),
+		 getReviews)
 	.post(
-		// authenticate,
+		authenticate,
 		// authorize(ROLES.USER),
-		validate(addReviewSchema),
+		// validate(addReviewSchema),
 		addReview
 	)
 	.put(
-		// authenticate,
+		authenticate,
+
 		// authorize(ROLES.USER),
-		validate(updateReviewSchema),
+		// validate(updateReviewSchema),
 		updateReview
 	)
 	.delete(
-		// authenticate,
+		authenticate,
 		// authorize(ROLES.USER),
-		validate(deleteReviewSchema),
+		// validate(deleteReviewSchema),
 		deleteReview
 	)
 export default router

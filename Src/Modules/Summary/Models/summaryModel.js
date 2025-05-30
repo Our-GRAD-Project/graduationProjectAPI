@@ -5,24 +5,26 @@ const summarySchema = new mongoose.Schema({
     title:{
         type:String,
         minLength: 2,
-        
+        trim: true,
+        maxLength: 20,
+        // required:true,
     },
     author:{
         type:String,
         minLength:2,
         maxLength:20,
-        required:true,
+        // required:true,
     },
     description: {
         type: String,
         minLength: 3,
-        required: true,
+        // required: true,
         trim: true
     },
     content: {
         type: String,
         minLength: 3,
-        required: true,
+        // required: true,
         trim: true
     },
     language: {
@@ -40,8 +42,8 @@ const summarySchema = new mongoose.Schema({
     },
     category_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'category',
-        required: true
+        ref: 'Category',
+        // required: true
     },
     audio: {
         type: mongoose.Schema.Types.ObjectId,
@@ -57,7 +59,8 @@ const summarySchema = new mongoose.Schema({
 
 summarySchema.pre(/find/i, function (next) {
     this.populate('coverImage')
-    this.populate('subcategory_id')
+    this.populate('audio')
+    // this.populate('category_id')
     next()
 })
 

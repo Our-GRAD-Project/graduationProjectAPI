@@ -39,13 +39,13 @@ export const addSummary = catchAsyncError(async(req,res) => {
     })
 })
 export const getSummary = catchAsyncError(async(req,res) => {
-    const summary = await summaryModel.findById(req.params.id)
+    const summary = await summaryModel.findOne({_id:req.params.Id})
     res.json({
         summary
     })
 })
 export const deleteSummary = catchAsyncError(async(req,res) => {
-    const summary = await summaryModel.findByIdAndDelete(req.params.id)
+    const summary = await summaryModel.findByIdAndDelete(req.params.Id)
     res.json({
         summary
     })

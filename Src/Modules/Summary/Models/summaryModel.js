@@ -60,7 +60,7 @@ const summarySchema = new mongoose.Schema({
 summarySchema.pre(/find/i, function (next) {
     this.populate('coverImage')
     this.populate('audio')
-    // this.populate('category_id')
+    this.populate('category_id')
     next()
 })
 

@@ -25,20 +25,11 @@ router.route('/recommended')
    .get(authenticate ,getRecommendedSummaries)
 
 
-router.route('/:summaryId')
-    .get(
-        // validate(getProductSchema),
-        getSummary
-).delete(
-    // validate(deleteProductSchema),
-    deleteSummary
-)
-// .put(
-//     upload.single("cover_image"),
-//     validate(updateProductSchema),
-//     attachCoverImage(),
-//     updateSummaryWithImages
-// )
+router.route('/:Id')
+.get(getSummary)
+.delete(deleteSummary)
+
+
 
 router.use('/:summaryId/reviews/', reviewRouter)
 

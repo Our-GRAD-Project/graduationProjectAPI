@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { upload } from "../../../Middlewares/upload.js";
 import validate from "../../../Middlewares/validation.js";
-import { addSummary, deleteSummary, getRecommendedSummaries, getSummaries, getSummary } from "../Controllers/summariesControllers.js";
+import { addSummary, deleteSummary, getRecommendedSummaries, getSummaries, getSummariesOfCategory, getSummary } from "../Controllers/summariesControllers.js";
 import { addSummarySchema } from "../Validations/summariesValidation.js";
 import { authenticate } from "../../Auth/Middlewares/authenticate.js";
 import reviewRouter from "./review.route.js";
@@ -29,6 +29,8 @@ router.route('/:Id')
 .get(getSummary)
 .delete(deleteSummary)
 
+router.route('/category/:categoryId')
+.get(getSummariesOfCategory)
 
 
 router.use('/:summaryId/reviews/', reviewRouter)

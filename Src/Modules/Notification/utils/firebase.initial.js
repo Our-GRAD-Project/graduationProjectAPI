@@ -1,9 +1,9 @@
 import admin from "firebase-admin";
-
-import serviceAccount from '../../../../baseera-42207-firebase-adminsdk-fbsvc-3cc05e5104.json' with { type: "json" };
-
+import dotenv from "dotenv"
+dotenv.config()
+const firebaseConfig = JSON.parse(process.env.FIREBASE_CONFIG);
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(firebaseConfig)
 });
 
 export default admin

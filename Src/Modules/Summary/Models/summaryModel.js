@@ -6,7 +6,7 @@ const summarySchema = new mongoose.Schema({
         type:String,
         minLength: 2,
         trim: true,
-        maxLength: 20,
+        maxLength: 50,
         // required:true,
     },
     author:{

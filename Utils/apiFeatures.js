@@ -36,7 +36,7 @@ export class ApiFeatures {
   
     search(fieldsToSearch) {
       if (!this.reqQuery.keywords) return this;
-      const regex = new RegExp(this.query.keywords, "i");
+      const regex = new RegExp(this.reqQuery.keywords, "i");
       const regexQuery = fieldsToSearch.map((field) => {
         return { [field]: regex };
       });
